@@ -70,7 +70,7 @@ function App() {
           </h1>
           <a
             className="spec_button"
-            href={`${process.env.PUBLIC_URL}/Images/Resume-rev4.pdf`}
+            href={`${process.env.PUBLIC_URL}/Images/Resume-rev6.pdf`}
             target="_blank"
             rel="noopener noreferrer"
           >
