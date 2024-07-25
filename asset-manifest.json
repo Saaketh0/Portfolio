@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Portfolio/static/css/main.412b4d69.css",
+    "main.js": "/Portfolio/static/js/main.f741fa9c.js",
+    "static/media/eugene-golovesov-12-LhcMD2Hg-unsplash.jpg": "/Portfolio/static/media/eugene-golovesov-12-LhcMD2Hg-unsplash.5ebf19c885cf9adf551b.jpg",
+    "index.html": "/Portfolio/index.html",
+    "main.412b4d69.css.map": "/Portfolio/static/css/main.412b4d69.css.map",
+    "main.f741fa9c.js.map": "/Portfolio/static/js/main.f741fa9c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.412b4d69.css",
+    "static/js/main.f741fa9c.js"
+  ]
+}
