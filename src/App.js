@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <aside
+      <aside // Everything inside the aside <> is part of the side bar
         id="border"
         className="border js-fullheight"
         style={{
@@ -20,6 +20,7 @@ function App() {
         <div className="centerImage" style={{ padding: "20px" }}>
           <img
             src={
+              // Picture of me right here aren't I pretty
               process.env.PUBLIC_URL +
               "/Images/Saaketh_Headshot_1-removebg-preview.png"
             }
@@ -68,7 +69,7 @@ function App() {
             <br />
             I'm Saaketh
           </h1>
-          <a
+          <a // The resume clicker button
             className="spec_button"
             href={`${process.env.PUBLIC_URL}/Images/Resume-rev6.pdf`}
             target="_blank"
@@ -77,7 +78,7 @@ function App() {
             Resume Link
             <img
               className="spec_img"
-              src={process.env.PUBLIC_URL + "/Images/pngwing.com.png"}
+              src={process.env.PUBLIC_URL + "/Images/pngwing.com.png"} // This is for that little symbol besides 'Resume'
               alt=""
               style={{ height: "25px", top: "10px" }}
             />
@@ -126,6 +127,7 @@ function App() {
           </p>
           <img
             src={
+              // Image for the chrome extension
               process.env.PUBLIC_URL + "/Images/Chrome_Extension_Smaller.jpg"
             }
             alt=""
@@ -141,7 +143,7 @@ function App() {
             within 200 centimeters.
           </p>
           <img
-            src={process.env.PUBLIC_URL + "/Images/IMG_5548.jpg"}
+            src={process.env.PUBLIC_URL + "/Images/IMG_5548.jpg"} // Ultrasonic Tracker Image
             alt=""
             style={{ width: "310px", height: "255px" }}
           />

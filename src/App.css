@@ -31,6 +31,7 @@ body {
   background-color: #faf9f6;
 }
 .sections1 {
+  /* Formatting for the Hi!, Im Saaketh text */
   font-family: "Lobster";
   margin-bottom: 150px;
   color: #0f4001;
@@ -39,6 +40,7 @@ body {
   text-align: left;
 }
 .spec_button {
+  /* This is the formatting for the button to click on the resume */
   text-decoration: none;
   font-size: 25px;
   color: #faf9f6;
@@ -50,6 +52,7 @@ body {
   border-radius: 10px;
 }
 .spec_img {
+  /* For the image beside the text in the resume click link */
   filter: invert(1) hue-rotate(0deg);
   /*background-color: transparent;*/
   transform: translate(5px, 3px);
@@ -59,6 +62,7 @@ body {
   font-size: 50px;
 }
 @media (prefers-reduced-motion: no-preference) {
+  /* Im pretty sure theres no purpose to this but im too tired to take it out at this point */
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
@@ -68,6 +72,7 @@ html {
 }
 
 .App-header {
+  /* Formatting for the first part, covered in leaves */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -88,6 +93,7 @@ html {
 }
 
 @keyframes App-logo-spin {
+  /* Also pretty sure this servers no purpose but dont fix what already works */
   0% {
     color: red;
   }
