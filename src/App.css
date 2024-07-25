@@ -1,0 +1,106 @@
+.App {
+  text-align: center;
+}
+.nav_place {
+  margin-bottom: 10px;
+  color: black;
+}
+.container {
+  display: flex;
+}
+
+.nav_buttons {
+  color: #ba9c86;
+  text-decoration: none;
+  margin-left: -35px;
+}
+.nav_buttons:hover {
+  color: greenyellow;
+  text-decoration: underline;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+body {
+  overflow: auto;
+  height: 400vh;
+  font-family: "Lobster";
+  margin-bottom: 50px;
+  background-color: #faf9f6;
+}
+.sections1 {
+  font-family: "Lobster";
+  margin-bottom: 150px;
+  color: #0f4001;
+  padding: 0px 75px 0px 75px;
+  font-size: 25px;
+  text-align: left;
+}
+.spec_button {
+  text-decoration: none;
+  font-size: 25px;
+  color: #faf9f6;
+  margin-left: -850px;
+  margin-top: -50px;
+  border: 2px solid #faf9f6;
+  padding: 0px 10px 0px 10px;
+  background-color: transparent;
+  border-radius: 10px;
+}
+.spec_img {
+  filter: invert(1) hue-rotate(0deg);
+  /*background-color: transparent;*/
+  transform: translate(5px, 3px);
+}
+.Header {
+  text-align: left;
+  font-size: 50px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Lobster";
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 7vmin);
+  color: #faf9f6;
+  margin-bottom: 200px;
+
+  background-image: url("/public/Images/eugene-golovesov-12-LhcMD2Hg-unsplash.jpg"); /* Path relative to the public folder */
+  background-size: cover;
+  /*height: 100vh;
+  width: 100vw;*/
+}
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  0% {
+    color: red;
+  }
+  50% {
+    color: yellow;
+  }
+  100% {
+    color: green;
+  }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
