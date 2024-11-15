@@ -20,7 +20,8 @@ function App() {
         <div className="centerImage" style={{ padding: "20px" }}>
           <img
             src={
-              // Picture of me right here aren't I pretty
+              // Picture of me right here aren't I pretty (idk)
+              // Why did I say this was I high? (11/15/2024)
               process.env.PUBLIC_URL +
               "/Images/Saaketh_Headshot_1-removebg-preview.png"
             }
@@ -71,7 +72,7 @@ function App() {
           </h1>
           <a // The resume clicker button
             className="spec_button"
-            href={`${process.env.PUBLIC_URL}/Images/Resume-rev6.pdf`}
+            href={`${process.env.PUBLIC_URL}/Images/Resume_Sodanapalli_Saaketh.pdf`}
             target="_blank"
             rel="noopener noreferrer"
           >
