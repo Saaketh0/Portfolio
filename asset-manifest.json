@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Portfolio/static/css/main.5918f7d7.css",
+    "main.js": "/Portfolio/static/js/main.c5a56796.js",
+    "static/media/landscape_background_with_an_abstract_topography_map_design_0305.jpg": "/Portfolio/static/media/landscape_background_with_an_abstract_topography_map_design_0305.1cff7baafc0f839ee957.jpg",
+    "static/media/10516833.png": "/Portfolio/static/media/10516833.cbc49fc49527451b69eb.png",
+    "index.html": "/Portfolio/index.html",
+    "main.5918f7d7.css.map": "/Portfolio/static/css/main.5918f7d7.css.map",
+    "main.c5a56796.js.map": "/Portfolio/static/js/main.c5a56796.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5918f7d7.css",
+    "static/js/main.c5a56796.js"
+  ]
+}
