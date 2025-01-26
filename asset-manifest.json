@@ -1,14 +1,15 @@
 {
   "files": {
-    "main.css": "/Portfolio/static/css/main.412b4d69.css",
-    "main.js": "/Portfolio/static/js/main.1a08eef0.js",
-    "static/media/eugene-golovesov-12-LhcMD2Hg-unsplash.jpg": "/Portfolio/static/media/eugene-golovesov-12-LhcMD2Hg-unsplash.5ebf19c885cf9adf551b.jpg",
+    "main.css": "/Portfolio/static/css/main.b1137f3a.css",
+    "main.js": "/Portfolio/static/js/main.ac251b47.js",
+    "static/media/10516833.png": "/Portfolio/static/media/10516833.cbc49fc49527451b69eb.png",
+    "static/media/260173.jpg": "/Portfolio/static/media/260173.b46a096c79836c1688fd.jpg",
     "index.html": "/Portfolio/index.html",
-    "main.412b4d69.css.map": "/Portfolio/static/css/main.412b4d69.css.map",
-    "main.1a08eef0.js.map": "/Portfolio/static/js/main.1a08eef0.js.map"
+    "main.b1137f3a.css.map": "/Portfolio/static/css/main.b1137f3a.css.map",
+    "main.ac251b47.js.map": "/Portfolio/static/js/main.ac251b47.js.map"
   },
   "entrypoints": [
-    "static/css/main.412b4d69.css",
-    "static/js/main.1a08eef0.js"
+    "static/css/main.b1137f3a.css",
+    "static/js/main.ac251b47.js"
   ]
 }
