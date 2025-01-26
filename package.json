@@ -1,7 +1,7 @@
 {
   "homepage": "https://Saaketh0.github.io/Portfolio",
   "name": "js-react",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -19,7 +19,7 @@
     "eject": "react-scripts eject",
     "clean": "rimraf build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -b master -d build"
   },
   "eslintConfig": {
     "extends": [
