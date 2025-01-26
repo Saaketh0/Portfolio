@@ -4,85 +4,40 @@ import Card from "./Card.js";
 
 function App() {
   return (
-    <div
-      className="App"
-      style={{
-        //marginTop: "80px",
-        width: "100%",
-        padding: "0",
-        boxSizing: "border-box",
-        maxWidth: "100vw",
-        minHeight: "100vh",
-      }}
-    >
+    <div className="App">
       <div
         style={{
-          width: "100%",
-          maxWidth: "100%",
-          margin: "0",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "stretch",
+          display: "flex", // Keeps the length constant
+          flexDirection: "column", // Keeps the page width constant
+          alignItems: "stretch", // Keeps the page width constant
         }}
       >
         <aside
-          id="border"
-          className="border js-fullheight"
           style={{
-            fontSize: "16px",
-            top: 0,
-            left: 0,
             position: "fixed",
-            backgroundColor: "rgba(27, 19, 11, 0.8)",
-            backdropFilter: "blur(5px)",
             height: "50px",
             width: "100%",
-            zIndex: 1000,
           }}
         >
-          <div
-            className="centerImage"
-            style={{
-              padding: "10px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <h1
-              style={{ fontSize: "24px", color: "#FAF9F6", margin: "0 20px" }}
-            >
-              Saaketh Sodanapalli
-            </h1>
-            <nav style={{ marginRight: "40px" }}>
-              <ul
-                style={{
-                  listStyleType: "none",
-                  fontSize: "20px",
-                  display: "flex",
-                  gap: "50px", // Increased gap between navigation items
-                  margin: 0,
-                  padding: 0,
-                }}
-              >
-                <li className="nav_place">
-                  <a className="nav_buttons" href="#Introduction">
-                    Introduction
-                  </a>
-                </li>
-                <li className="nav_place">
-                  <a className="nav_buttons" href="#Projects">
-                    Projects
-                  </a>
-                </li>
-                <li className="nav_place">
-                  <a className="nav_buttons" href="#Contact">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
+          <nav>
+            <ul className="nav_place">
+              <li>
+                <a className="nav_buttons" href="#Introduction">
+                  Introduction
+                </a>
+              </li>
+              <li>
+                <a className="nav_buttons" href="#Projects">
+                  Projects
+                </a>
+              </li>
+              <li>
+                <a className="nav_buttons" href="#Contact">
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </nav>
         </aside>
 
         <main
@@ -92,7 +47,10 @@ function App() {
           }}
         >
           <header className="App-header">
-            <div className="bubble-text-container">
+            <div
+              className="bubble-text-container"
+              style={{ marginLeft: "-59%" }}
+            >
               {Array.from("Hi!").map((child, idx) => (
                 <span
                   className="hoverText"
@@ -102,10 +60,12 @@ function App() {
                   {child}
                 </span>
               ))}
-              <br />
             </div>
-            <div className="bubble-text-container">
-              {Array.from("I'm Saaketh").map((child, idx) => (
+            <div
+              className="bubble-text-container"
+              style={{ marginLeft: "-36.6%" }}
+            >
+              {Array.from("I'm     Saaketh").map((child, idx) => (
                 <span
                   className="hoverText"
                   key={idx}
@@ -121,7 +81,7 @@ function App() {
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                marginLeft: "-40%",
+                marginLeft: "-54.5%",
                 marginTop: "20px",
                 display: "flex",
                 alignItems: "center",
@@ -145,32 +105,47 @@ function App() {
           </header>
           <section className="sections1" id="Introduction">
             <h1 className="Header"> Introduction </h1>
-            <p className="text-content" style={{ textIndent: "50px" }}>
+            <p className="text-content">
               Hello and welcome to my website! My name is Saaketh Sodanapalli
               and I'm currently a junior at the University of Massachusetts
-              Amherst double majoring in Computer Engineering and Math.
+              Amherst pursuing a B.S in Computer Engineering and a dual B.S. in
+              Mathematics.
             </p>
-            <p className="text-content" style={{ textIndent: "50px" }}>
+            <p className="text-content">
+              I decided to be Computer Engineering because of my interest in
+              computers, considering how ingrained it is in todays society. I
+              really wanted to learn the ins and outs of both software and
+              hardware, leading me to pick CompE over CompSci. I decided to
+              pursue a secondary major in Mathematics with a Mathematical
+              Computing concentration, as I've wanted to pursue a career in AI
+              and Machine Learning and the math required for that. I love to
+              learn new things, and I'm always looking for new opportunities to
+              learn.
+            </p>
+            <p className="text-content">
               Outside my studies, I like to workout a lot and am currently a
-              part of my universities club swim team, with me making club
-              nationals both years! I have also been starting to get into
-              running and triathlons lately. I also like to read books, ranging
-              from a wide amount of genres, from thrillers to fantasy although
-              lately I've been starting to read some non-fiction like Atomic
-              Habits.
+              part of my universities club swim team (Go UMCS!), with me making
+              the national swim meet every year so far! Alongside swimming, I've
+              been getting more into running and triathlons lately, if I can
+              figure out how to avoid shin splints. I also like to read books,
+              like thrillers and fantasy, although lately I've been starting to
+              read some non-fiction like Atomic Habits.
             </p>
-            <p className="text-content" style={{ textIndent: "50px" }}>
-              I've always been interested in Computers and coding, with my
-              entire family having jobs focused in that field, leading me to
-              this major. So far, I am interested in developing and using AI to
-              help solve and simplify problems, as well as developing new
-              hardware such as embedded systems and robotics to help solve
-              problems and improve the quality of life of people.
+            <p className="text-content">
+              Hope you like my website! Below are my projects and below that is
+              my contact information. I'd love to hear any suggestions on
+              improvements for my website too, I'd love to make it look even
+              better than it is right now.
             </p>
           </section>
           <section className="sections1" id="Projects">
             <h1 className="Header">Projects</h1>
             <div className="cards-matrix">
+              <Card
+                title="miniGPT"
+                description="This is the current project I am working on. It is a mini version of the GPT-2 model, having an decoder only architecutre and 
+                is currently being trained on Shakespeare's works and tokenized using Hugging Face's GPT-2 tokenizer. Currently, I am working on ironing out some kinks in the Hugging Face tokenizer, as I was originally using a simple ASCII character tokenizer. I also will make it a Q/A model instead of a text generation model. Finally, I will re-train the model on a far larger piece of text, likely from Wikimedia."
+              />
               <Card
                 title="Spotify Current Song Player"
                 description="I created a Chrome Extension that displays the current song playing alongside an option to skip the song. I used JavaScript, HTML, and CSS for this project, accessing various Chrome APIs alongside the Spotify API. This project is also currently a work in progress with some troubleshooting needed for the skip button to fully function."
@@ -187,12 +162,16 @@ function App() {
               <Card
                 //image={process.env.PUBLIC_URL + "/Images/recipe_generator.jpg"}
                 title="Cooking Recipe Generator"
-                description="For a hackathon, my team and I developed an app that allows you to input ingredients you want to make a meal with, then scrapes Food Networks recipes to find a recipe that matches the criteria entered in. We used React for the front end design, using Python and Flask for the backend. We used the Github API calls to search through all of the recipes in Food Network."
+                description="For a hackathon, my team and I developed an app that allows you to input ingredients you want to make a meal with, then scrapes Food Networks recipes to find a recipe that matches
+                 the criteria entered in. We used React for the front end design, using Python and Flask for the backend. We used the Github API calls to search through all of the recipes in Food Network.
+                 We sadly didn't keep the website domain up, but all of the code is available on my github."
               />
               <Card
                 //image={process.env.PUBLIC_URL + "/Images/portfolio.jpg"}
                 title="This Portfolio Website"
-                description="I developed this portfolio website utilizing React as the core framework, with Git serving as the version control system to efficiently manage and track the progress of the site."
+                description="I developed this portfolio website utilizing React as the core framework, with Git
+                 serving as the version control system to efficiently manage and track the progress of the site.
+                 I first made this website summer of 2022, and have completely redone it in January 2025."
               />
               <Card
                 image={process.env.PUBLIC_URL + "/Images/Snake_game.png"}
@@ -207,11 +186,7 @@ function App() {
             </div>
           </section>
 
-          <section
-            className="sections1"
-            style={{ padding: "0px 75px 0px 75px" }} //This adds the little bit of space at the very bottom of the page
-            id="Contact"
-          >
+          <section className="sections1" id="Contact">
             <h1 className="Header">Contact Me!</h1>
             <p>Email: saaketh1001@gmail.com</p>
             <p>
@@ -243,21 +218,5 @@ function App() {
     </div>
   );
 }
-/*
-const BubbleText = () => {
-  return (
-    <div className="bubble-text-container">
-      {Array.from("Bubbbbbbbble text").map((child, idx) => (
-        <span
-          className="hoverText"
-          key={idx}
-          style={{ display: "inline-block" }}
-        >
-          {child}
-        </span>
-      ))}
-    </div>
-  );
-};
-*/
+
 export default App;
