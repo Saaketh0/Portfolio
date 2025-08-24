@@ -8,46 +8,110 @@ Things I can do to improve it later:
 4 cont.. So I've managed to clean up the .js file a little, but this .css file has so much redudancy
 */
 
+#root {
+  background-color: transparent !important; /* Removed opacity filter */
+  min-height: 100vh;
+  /* Extend filter beyond edges */
+  position: relative;
+  margin: -50px;
+  padding: 50px;
+}
+
 .App {
   text-align: center;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  font-family: "Lobster";
-  width: 100%;
-  padding: 0;
-  box-sizing: border-box;
-  max-width: 100vw;
-  min-height: 100vh;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
+  background-color: transparent; /* Changed from any background to transparent */
 }
 
 /* For the navigation bar */
-.nav_place {
-  list-style-type: none;
-  font-size: 20px;
-  display: flex;
-  gap: 50px;
-  margin: 0;
-  margin-right: 20px;
-  margin-bottom: 10px;
-  padding: 15px;
+
+/* Scroll Progress Bar */
+.scroll-progress-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: 1001;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #CC9933, #E6B33F, #B38026); /* Muted gold gradient */
+  transition: width 0.1s ease;
+  border-radius: 0 2px 2px 0;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb-container {
+  position: absolute;
+  top: 8px;
+  left: 20px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(242, 242, 235, 0.9); /* Muted white text */
   z-index: 1000;
 }
+
+.breadcrumb-item {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb-item:hover {
+  color: #CC9933; /* Muted gold on hover */
+}
+
+.breadcrumb-separator {
+  color: rgba(242, 242, 235, 0.6); /* Muted white separator */
+}
+
+.breadcrumb-active {
+  color: #CC9933; /* Muted gold for active */
+  font-weight: bold;
+}
+
+/* Navigation styling */
+.nav_place {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+  margin-top: 20px; /* Lower the navigation bar */
+  margin-right: 40px; /* Move navigation icons to the right */
+  padding: 0;
+  gap: 30px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
 .nav_buttons {
   color: #ffffff;
   text-decoration: none;
-  margin-left: -35px;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  transition: all 0.3s ease;
+  padding: 8px 8px;
+  border-radius: 6px;
+  position: relative;
 }
+
 .nav_buttons:hover {
-  color: #a1a1a1;
-  text-decoration: underline;
+  font-weight: 700; /* Bold on hover instead of widening */
+  color: #CC9933;
+  text-shadow: 0 0 10px rgba(204, 153, 51, 0.5);
 }
+
+.nav_active {
+  color: #CC9933 !important;
+  font-weight: 700;
+  text-decoration: underline;
+  text-shadow: 0 0 10px rgba(204, 153, 51, 0.5);
+}
+
 /* These following three makes sure the nav bar displays the section in the middle of the page*/
 #Projects {
   scroll-margin-top: 40vh;
@@ -71,15 +135,14 @@ body {
   padding: 0;
 }
 body {
-  overflow: auto;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: transparent !important; /* Removed opacity filter */
   min-height: 100vh;
-  margin-bottom: 0px;
-  background-color: rgba(246, 244, 241, 0.9);
-  background-image: url("/public/Images/10516833.png");
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 .sections1 {
   /* Formatting for the Introduction section */
@@ -89,6 +152,16 @@ body {
   font-size: 25px;
   text-align: left;
   scroll-margin-top: 40vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+/* Add extra spacing between Projects and Contact sections */
+#Projects {
+  margin-bottom: 200px;
+}
+
+#Contact {
+  margin-bottom: 500px;
 }
 .spec_button {
   /* This is the formatting for the button to click on the resume */
@@ -101,6 +174,7 @@ body {
   padding: 0px 10px 0px 10px;
   background-color: transparent;
   border-radius: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 .spec_img {
   /* For the image beside the text in the resume click link */
@@ -120,6 +194,7 @@ body {
 .Header {
   text-align: left;
   font-size: 50px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .App-header {
@@ -132,8 +207,9 @@ body {
   font-size: calc(10px + 7vmin);
   color: #faf9f6;
   margin-bottom: 200px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 
-  background-image: url("/public/Images/10516833.png");
+  /* background-image: url("/public/Images/10516833.png"); - Replaced with 3D background */
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -141,90 +217,90 @@ body {
 .text-content {
   /* For the words in the intro section */
   text-indent: 50px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 /* For the cards in the projects section */
-/* Good Luck to my future self who tries to modify this */
-.cards-matrix {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  padding: 40px;
-  padding-left: 150px;
-  padding-right: 400px;
-  max-width: 900px;
-  margin: 0 auto;
-}
 .card {
-  background: #ffffff; /* Light bone white background with 80% opacity */
-  background-image: url("/public/Images/260173.jpg");
-  /*background-size: 250% 250%; /* Increased from 'cover' to zoom out */
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.1s ease;
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(246, 244, 241, 0.2);
-  width: 500px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(204, 153, 51, 0.3);
+  border-radius: 12px;
+  padding: 25px;
+  margin: 20px;
+  width: 300px;
   height: 400px;
-  min-height: 150px;
-  margin: 0 auto;
-  overflow-y: auto; /* Enable vertical scrolling */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
   position: relative;
-  z-index: 1;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
 }
-.card-content {
-  flex-grow: 1;
-  padding: 10px;
-}
-.card h3 {
-  color: #000000;
-  margin-bottom: 10px;
-  text-align: center;
-  font-size: 1.5rem;
-  padding: 0 5px;
-  font-weight: bold;
-}
-.card p {
-  color: #000000;
-  font-size: 1.1rem;
-  line-height: 1.5;
-  padding: 0 5px;
-  margin: 0;
-  font-weight: bold;
-}
-.card-image {
-  width: 50%; /* Make image fill card width */
-  height: auto; /* Maintain aspect ratio */
-  object-fit: contain; /* Show full image without cropping */
-  border-radius: 5px;
-  margin: 10px auto 0 auto;
-}
+
 .card:hover {
-  transform: scale(1.1);
-  width: 600px;
-  height: 500px; /* Increased height to show more content */
-  background: rgba(246, 244, 241, 0.6);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  z-index: 2;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(204, 153, 51, 0.2);
+  border-color: rgba(204, 153, 51, 0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
+
+.card h3 {
+  color: #CC9933;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.card p {
+  color: #ffffff;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-align: left;
+  margin-bottom: 15px;
+  opacity: 0.9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(204, 153, 51, 0.2);
+}
+
+.cards-matrix {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 /* Add smooth scrollbar styling */
 .card::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
+
 .card::-webkit-scrollbar-track {
-  background: rgba(246, 244, 241, 0.1);
-  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
 }
+
 .card::-webkit-scrollbar-thumb {
-  background: rgba(246, 244, 241, 0.3);
-  border-radius: 4px;
+  background: rgba(204, 153, 51, 0.4);
+  border-radius: 3px;
+  transition: background 0.3s ease;
 }
+
 .card::-webkit-scrollbar-thumb:hover {
-  background: rgba(246, 244, 241, 0.5);
+  background: rgba(204, 153, 51, 0.6);
 }
 /* Make images responsive */
 @media (max-width: 768px) {
@@ -258,7 +334,7 @@ body {
   align-items: flex-start;
   gap: 2px; /* This is the gap between the letters */
   font-size: 100px;
-  color: #f6f4f1;
+  color: #F2F2EB; /* Muted white text */
   padding: 0px;
   text-align: left;
 }
@@ -290,39 +366,46 @@ body {
   animation: textColorChangeLighter 5s infinite;
   animation-fill-mode: both;
 }
+
 /* For the letter being hovered over */
 @keyframes textColorChange {
   0% {
-    color: rgb(160, 169, 204);
-  } /* Base purple */
+    color: #CC9933; /* Muted gold */
+  }
   25% {
-    color: rgb(199, 210, 254);
-  } /* Lighter purple */
+    color: #E6B33F; /* Lighter muted gold */
+  }
   50% {
-    color: rgb(129, 140, 248);
-  } /* Indigo */
+    color: #B38026; /* Darker muted gold */
+  }
   75% {
-    color: rgb(139, 92, 246);
-  } /* Violet */
+    color: #D4A574; /* Warm muted gold */
+  }
   100% {
-    color: rgb(160, 169, 204);
-  } /* Back to base purple */
+    color: #CC9933; /* Back to muted gold */
+  }
 }
+
 /* For the left and right letters */
 @keyframes textColorChangeLighter {
   0% {
-    color: rgb(199, 210, 254);
-  } /* Light purple */
+    color: #E6B33F; /* Light muted gold */
+  }
   25% {
-    color: rgb(224, 231, 255);
-  } /* Very light purple */
+    color: #F0D4A3; /* Very light muted gold */
+  }
   50% {
-    color: rgb(165, 180, 252);
-  } /* Light indigo */
+    color: #E6C8A0; /* Light warm muted gold */
+  }
   75% {
-    color: rgb(167, 139, 250);
-  } /* Light violet */
+    color: #E6D4B8; /* Peach muted gold */
+  }
   100% {
-    color: rgb(199, 210, 254);
-  } /* Back to light purple */
+    color: #E6B33F; /* Back to light muted gold */
+  }
+}
+
+main {
+  margin-left: 0%;
+  background-color: transparent; /* Changed from rgba(0, 0, 0, 0.9) to transparent */
 }

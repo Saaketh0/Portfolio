@@ -4,27 +4,222 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#FFFFFF" />
+    <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Saaketh Sodanapalli - Computer Engineering Portfolio"
     />
-    <link rel="apple-touch-icon" href="%js-react/PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>Saaketh's Website</title>
+    
+    <!-- Three.js for Monjori shader background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    
+    <title>Saaketh Sodanapalli - Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000 !important;
+        }
+        
+        #root {
+            background-color: #000000 !important;
+        }
+        
+        #shader-container {
+            background-color: #000000 !important;
+        }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    
+    <!-- Monjori Shader Background -->
+    <div id="shader-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; background-color: #000000;"></div>
+    
+    <!-- Parallax Shader Background -->
+    <div id="parallax-shader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; background-color: #000000;"></div>
+    
+    <!-- Shader Scripts -->
+    <script id="vertexShader" type="x-shader/x-vertex">
+      varying vec2 vUv;
+
+      void main() {
+        vUv = uv;
+        gl_Position = vec4( position, 1.0 );
+      }
+    </script>
+
+    <script id="fragmentShader" type="x-shader/x-fragment">
+      varying vec2 vUv;
+      uniform float time;
+
+      void main() {
+        vec2 p = - 1.0 + 2.0 * vUv;
+        float a = time * 40.0;
+        float d, e, f, g = 1.0 / 40.0 ,h ,i ,r ,q;
+
+        e = 400.0 * ( p.x * 0.5 + 0.5 );
+        f = 400.0 * ( p.y * 0.5 + 0.5 );
+        i = 200.0 + sin( e * g + a / 150.0 ) * 20.0;
+        d = 200.0 + cos( f * g / 2.0 ) * 18.0 + cos( e * g ) * 7.0;
+        r = sqrt( pow( abs( i - e ), 2.0 ) + pow( abs( d - f ), 2.0 ) );
+        q = f / r;
+        e = ( r * cos( q ) ) - a / 2.0;
+        f = ( r * sin( q ) ) - a / 2.0;
+        d = sin( e * g ) * 176.0 + sin( e * g ) * 164.0 + r;
+        h = ( ( f + d ) + a / 2.0 ) * g;
+        i = cos( h + r * p.x / 1.3 ) * ( e + e + a ) + cos( q * g * 6.0 ) * ( r + h / 3.0 );
+        h = sin( f * g ) * 144.0 - sin( e * g ) * 212.0 * p.x;
+        h = ( h + ( f - e ) * q + sin( r - ( a + h ) / 7.0 ) * 10.0 + i / 4.0 ) * g;
+        i += cos( h * 2.3 * sin( a / 350.0 - q ) ) * 184.0 * sin( q - ( r * 4.3 + a / 12.0 ) * g ) + tan( r * g + h ) * 184.0 * cos( r * g + h );
+        i = mod( i / 5.6, 256.0 ) / 64.0;
+        if ( i < 0.0 ) i += 4.0;
+        if ( i >= 2.0 ) i = 4.0 - i;
+        d = r / 350.0;
+        d += sin( d * d * 8.0 ) * 0.52;
+        f = ( sin( a * g ) + 1.0 ) / 2.0;
+        
+        // Custom color scheme: Black -> Dark Gold -> Gold gradient (Even Darker)
+        vec3 primaryBlack = vec3(0.0, 0.0, 0.0);      // Pure black
+        vec3 darkGold = vec3(0.1, 0.08, 0.03);         // Very dark gold
+        vec3 richGold = vec3(0.15, 0.1, 0.04);         // Very dark rich gold
+        
+        // Create color variations based on the shader math
+        vec3 color1 = mix(primaryBlack, darkGold, f * i / 1.6);
+        vec3 color2 = mix(darkGold, richGold, i / 2.0 + d / 13.0);
+        vec3 color3 = mix(richGold, primaryBlack, i);
+        
+        // Apply colors based on position and time
+        vec3 finalColor = mix(color1, color2, d * p.x) + mix(color3, color1, d * (1.0 - p.x));
+        
+        gl_FragColor = vec4(finalColor, 1.0);
+      }
+    </script>
+
+    <!-- Monjori Shader Initialization -->
+    <script>
+      // Initialize shader immediately and also after page load
+      function initMonjoriShader() {
+        console.log('Initializing Monjori shader background with parallax effect...');
+        
+        const container = document.getElementById('shader-container');
+        const parallaxContainer = document.getElementById('parallax-shader');
+        
+        if (!container || !parallaxContainer) {
+          console.error('Shader containers not found');
+          return;
+        }
+
+        // Check if Three.js is available
+        if (typeof THREE === 'undefined') {
+          console.error('Three.js not available yet');
+          return;
+        }
+
+        let camera, scene, renderer;
+        let parallaxCamera, parallaxScene, parallaxRenderer;
+        let uniforms, parallaxUniforms;
+
+        try {
+          // Initialize main Three.js scene
+          camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+          scene = new THREE.Scene();
+
+          const geometry = new THREE.PlaneGeometry(2, 2);
+
+          uniforms = {
+            time: { value: 1.0 }
+          };
+
+          const material = new THREE.ShaderMaterial({
+            uniforms: uniforms,
+            vertexShader: document.getElementById('vertexShader').textContent,
+            fragmentShader: document.getElementById('fragmentShader').textContent
+          });
+
+          const mesh = new THREE.Mesh(geometry, material);
+          scene.add(mesh);
+
+          renderer = new THREE.WebGLRenderer({ alpha: true });
+          renderer.setPixelRatio(window.devicePixelRatio);
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          renderer.setClearColor(0x000000, 0);
+          container.appendChild(renderer.domElement);
+
+          // Initialize parallax scene (moves slower)
+          parallaxCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+          parallaxScene = new THREE.Scene();
+
+          parallaxUniforms = {
+            time: { value: 1.0 }
+          };
+
+          const parallaxMaterial = new THREE.ShaderMaterial({
+            uniforms: parallaxUniforms,
+            vertexShader: document.getElementById('vertexShader').textContent,
+            fragmentShader: document.getElementById('fragmentShader').textContent
+          });
+
+          const parallaxMesh = new THREE.Mesh(geometry, parallaxMaterial);
+          parallaxScene.add(parallaxMesh);
+
+          parallaxRenderer = new THREE.WebGLRenderer({ alpha: true });
+          parallaxRenderer.setPixelRatio(window.devicePixelRatio);
+          parallaxRenderer.setSize(window.innerWidth, window.innerHeight);
+          parallaxRenderer.setClearColor(0x000000, 0);
+          parallaxContainer.appendChild(parallaxRenderer.domElement);
+
+          // Handle window resize
+          function onWindowResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            parallaxRenderer.setSize(window.innerWidth, window.innerHeight);
+          }
+          window.addEventListener('resize', onWindowResize);
+
+          // Parallax effect based on scroll
+          let scrollY = 0;
+          window.addEventListener('scroll', function() {
+            scrollY = window.pageYOffset;
+          });
+
+          // Animation loop
+          function animate() {
+            const time = performance.now() / 1000;
+            
+            // Main shader - normal speed
+            uniforms['time'].value = time;
+            renderer.render(scene, camera);
+            
+            // Parallax shader - slower speed with scroll effect
+            parallaxUniforms['time'].value = time * 0.5; // Slower animation
+            parallaxRenderer.render(parallaxScene, parallaxCamera);
+            
+            requestAnimationFrame(animate);
+          }
+
+          animate();
+          console.log('Monjori shader background with parallax effect initialized successfully!');
+        } catch (error) {
+          console.error('Error in shader initialization:', error);
+        }
+      }
+
+      // Try to initialize immediately
+      if (typeof THREE !== 'undefined') {
+        initMonjoriShader();
+      }
+
+      // Also initialize when page loads
+      window.addEventListener('load', function() {
+        // Try multiple times to ensure it loads
+        setTimeout(initMonjoriShader, 100);
+        setTimeout(initMonjoriShader, 500);
+        setTimeout(initMonjoriShader, 1000);
+      });
+    </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
