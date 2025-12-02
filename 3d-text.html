@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>3D Text - Hi! I'm Saaketh</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: transparent;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        /* Remove info styling since we don't need it anymore */
+    </style>
+</head>
+<body>
+    <!-- Removed info div since it's now embedded -->
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+        import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+
+        THREE.Cache.enabled = true;
+
+        let container;
+        let camera, cameraTarget, scene, renderer;
+        let group, textMesh1, textMesh2, textGeo, materials;
+
+        let text = 'Hi, I\'m Saaketh!';
+        const depth = 0;
+        const size = 45;
+        const hover = -20;
+        const curveSegments = 40;
+        const bevelThickness = 0.5;
+        const bevelSize = 0;
+        const bevelEnabled = true;
+        const mirror = false;
+
+        let targetRotation = 6;
+        let targetRotationOnPointerDown = 0;
+        let pointerX = 0;
+        let pointerXOnPointerDown = 0;
+        let windowHalfX = window.innerWidth / 2;
+
+        init();
+
+        function init() {
+            container = document.createElement('div');
+            document.body.appendChild(container);
+
+            // CAMERA
+            camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1500);
+            camera.position.set(0, 0, 400);
+            cameraTarget = new THREE.Vector3(0, 0, 0);
+
+            // SCENE
+            scene = new THREE.Scene();
+            scene.background = null; // Make background transparent
+            scene.fog = null; // Remove fog for better transparency
+
+            // LIGHTS - Simple lighting
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight.position.set(0, 0, 1).normalize();
+            scene.add(dirLight);
+
+            const pointLight = new THREE.PointLight(0xffffff, 1.0, 0, 0);
+            pointLight.position.set(0, 100, 90);
+            scene.add(pointLight);
+
+            // Simple gold material without shaders
+            materials = [
+                new THREE.MeshPhongMaterial({ 
+                    color: 0xFFD700, // Gold color
+                    transparent: true,
+                    opacity: 1.0,
+                    shininess: 50
+                }), // front
+                new THREE.MeshPhongMaterial({ 
+                    color: 0xDAA520, // Darker gold for sides
+                    transparent: true,
+                    opacity: 0.8
+                }) // side
+            ];
+
+            group = new THREE.Group();
+            group.position.y = 0;
+            scene.add(group);
+
+            loadFont();
+
+            // RENDERER
+            renderer = new THREE.WebGLRenderer({ 
+                antialias: true,
+                alpha: true // Enable transparency
+            });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setAnimationLoop(animate);
+            container.appendChild(renderer.domElement);
+
+            // EVENTS
+            container.style.touchAction = 'none';
+            container.addEventListener('pointerdown', onPointerDown);
+
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        function onWindowResize() {
+            windowHalfX = window.innerWidth / 2;
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onPointerDown(event) {
+            if (event.isPrimary === false) return;
+            pointerXOnPointerDown = event.clientX - windowHalfX;
+            targetRotationOnPointerDown = targetRotation;
+            document.addEventListener('pointermove', onPointerMove);
+            document.addEventListener('pointerup', onPointerUp);
+        }
+
+        function onPointerMove(event) {
+            if (event.isPrimary === false) return;
+            pointerX = event.clientX - windowHalfX;
+            targetRotation = targetRotationOnPointerDown + (pointerX - pointerXOnPointerDown) * 0.02;
+        }
+
+        function onPointerUp(event) {
+            if (event.isPrimary === false) return;
+            document.removeEventListener('pointermove', onPointerMove);
+            document.removeEventListener('pointerup', onPointerUp);
+        }
+
+        function loadFont() {
+            const loader = new FontLoader();
+            loader.load('https://threejs.org/examples/fonts/optimer_bold.typeface.json', function (font) {
+                createText(font);
+            });
+        }
+
+        function createText(font) {
+            textGeo = new TextGeometry(text, {
+                font: font,
+                size: size,
+                depth: depth,
+                curveSegments: curveSegments,
+                bevelThickness: bevelThickness,
+                bevelSize: bevelSize,
+                bevelEnabled: bevelEnabled
+            });
+
+            textGeo.computeBoundingBox();
+            const centerOffset = -0.5 * (textGeo.boundingBox.max.x - textGeo.boundingBox.min.x);
+
+            textMesh1 = new THREE.Mesh(textGeo, materials);
+            textMesh1.position.x = centerOffset;
+            textMesh1.position.y = hover;
+            textMesh1.position.z = 0;
+            textMesh1.rotation.x = 0;
+            textMesh1.rotation.y = Math.PI * 2;
+            group.add(textMesh1);
+
+            if (mirror) {
+                textMesh2 = new THREE.Mesh(textGeo, materials);
+                textMesh2.position.x = centerOffset;
+                textMesh2.position.y = -hover;
+                textMesh2.position.z = depth;
+                textMesh2.rotation.x = Math.PI;
+                textMesh2.rotation.y = Math.PI * 2;
+                group.add(textMesh2);
+            }
+        }
+
+        function animate() {
+            group.rotation.y += (targetRotation - group.rotation.y) * 0.05;
+            camera.lookAt(cameraTarget);
+            renderer.clear();
+            renderer.render(scene, camera);
+        }
+    </script>
+</body>
+</html>
