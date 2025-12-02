@@ -245,6 +245,22 @@ function App() {
             <h1 className="Header">Projects</h1>
             <div className="cards-matrix">
               <Card
+                title="6 DOF Robotic Arm (In Progress)"
+                description="I am currently building a 6 DOF Robotic Arm from scratch. I wanted to do this to explore more into the field of robotics, and plan on using opensource 3D molds for the robotic arm, mainly working on the wiring and the software. I eventually want to be able to connect the arm to either a controller and a camera to play with the robotic arm. I am currently going to use it to move my desk lamp around so I don't have to move my arms across my table."
+              />
+              <Card
+                title="Full Body Motion Tracking Device (In Progress)"
+                description="For my senior capstone project, my team and I are constricting a full body motion tracking device that tracks human sprinting and gives advice on form adjustments. We are using a combination of sensors to track the motion of the human body, and a computer vision model to analyze the motion and give advice on form adjustments, tempo, and training suggestions. I am responsible for the software side of this project, working with 3D movements and sensor fusion to accurately give pose advice. I would love to talk more about my progress too in person!"
+              />
+              <Card
+                title="Autosearch Complete RNN"
+                description="For my AI Class this past fall, I built a Neural Network Autocomplete system for my AI class using a character-level RNN in PyTorch. I engineered a custom sliding-window pipeline that slashed data-preprocessing time by 40% and trained the model on the massive War and Peace corpus."
+              />
+              <Card
+                title="Full Stack Nutrition Tracking App"
+                description="I was very unsatisfied with nutrition tracking apps out there, being either expensive or not having a lot of features. So I decided to build an app that had all my favorite features across different apps, namely: barcode scanning, automatic food analysis so you don't have to search for the specific food, and micronutrient tracking which is suprisingly not found in most apps."
+              />
+              <Card
                 title="miniGPT"
                 description="It is a mini version of the GPT-2 model, having an decoder only architecutre and 
                 is currently being trained on Shakespeare's works and tokenized using Hugging Face's GPT-2 tokenizer. Currently, I am working on ironing out some kinks in the Hugging Face tokenizer, as I was originally using a simple ASCII character tokenizer. I also will make it a Q/A model instead of a text generation model. Finally, I will re-train the model on a far larger piece of text, likely from Wikimedia."
