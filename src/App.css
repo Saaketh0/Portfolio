@@ -1,411 +1,292 @@
-/*
-1/26/2025: Done with Rev2
-Things I can do to improve it later:
-1. Give a border to the top nav bar buttons, or make them change colors if the background is white
-2. Add something else cooler
-3. Make the cards function better, I like them but they can be better
-4. Clean it up. Somehow this project has so much clutter for being like 600 lines of code
-4 cont.. So I've managed to clean up the .js file a little, but this .css file has so much redudancy
-*/
+:root {
+  --bg: #000000;
+  --text: #d0d0d0;
+  --text-muted: #b8b8b8;
+  --gold: #cc9933;
+  --gold-light: #e6b33f;
+  --card-bg: rgba(0, 0, 0, 0.42);
+  --card-border: rgba(204, 153, 51, 0.35);
+}
 
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
 #root {
-  background-color: transparent !important; /* Removed opacity filter */
-  min-height: 100vh;
-  /* Extend filter beyond edges */
-  position: relative;
-  margin: -50px;
-  padding: 50px;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text);
+  background-color: transparent;
 }
 
 .App {
   text-align: center;
-  background-color: transparent; /* Changed from any background to transparent */
+  background-color: transparent;
 }
 
-/* For the navigation bar */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
 
-/* Scroll Progress Bar */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.top-bar nav {
+  pointer-events: auto;
+}
+
 .scroll-progress-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 3px;
-  background-color: rgba(255, 255, 255, 0.2);
-  z-index: 1001;
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .scroll-progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #CC9933, #E6B33F, #B38026); /* Muted gold gradient */
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), #b38026);
   transition: width 0.1s ease;
-  border-radius: 0 2px 2px 0;
 }
 
-/* Breadcrumb Navigation */
-.breadcrumb-container {
-  position: absolute;
-  top: 8px;
-  left: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: rgba(242, 242, 235, 0.9); /* Muted white text */
-  z-index: 1000;
-}
-
-.breadcrumb-item {
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.breadcrumb-item:hover {
-  color: #CC9933; /* Muted gold on hover */
-}
-
-.breadcrumb-separator {
-  color: rgba(242, 242, 235, 0.6); /* Muted white separator */
-}
-
-.breadcrumb-active {
-  color: #CC9933; /* Muted gold for active */
-  font-weight: bold;
-}
-
-/* Navigation styling */
 .nav_place {
   list-style: none;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: 24px;
   margin: 0;
-  margin-top: 20px; /* Lower the navigation bar */
-  margin-right: 40px; /* Move navigation icons to the right */
-  padding: 0;
-  gap: 30px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  padding: 20px 40px 0;
 }
 
 .nav_buttons {
-  color: #d0d0d0;
+  color: var(--text);
   text-decoration: none;
-  font-size: 18px;
-  font-weight: 400;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  transition: all 0.3s ease;
-  padding: 8px 8px;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 8px;
   border-radius: 6px;
-  position: relative;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 .nav_buttons:hover {
-  font-weight: 700; /* Bold on hover instead of widening */
-  color: #CC9933;
+  color: var(--gold);
   text-shadow: 0 0 10px rgba(204, 153, 51, 0.5);
 }
 
 .nav_active {
-  color: #CC9933 !important;
+  color: var(--gold);
   font-weight: 700;
   text-decoration: underline;
-  text-shadow: 0 0 10px rgba(204, 153, 51, 0.5);
+  text-underline-offset: 4px;
 }
 
-/* These following three makes sure the nav bar displays the section in the middle of the page*/
-#Projects {
-  scroll-margin-top: 40vh;
-}
-#Contact {
-  scroll-margin-top: 40vh;
-}
-#Introduction {
-  scroll-margin-top: 40vh;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-html,
-body {
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-}
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: transparent !important; /* Removed opacity filter */
-  min-height: 100vh;
-}
-.sections1 {
-  /* Formatting for the Introduction section */
-  margin-bottom: 150px;
-  color: #d0d0d0;
-  padding: 0px 75px 0px 75px;
-  font-size: 25px;
-  text-align: left;
-  scroll-margin-top: 40vh;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-}
-
-/* Add extra spacing between Projects and Contact sections */
-#Projects {
-  margin-bottom: 200px;
-}
-
-#Contact {
-  margin-bottom: 500px;
-}
-.spec_button {
-  /* This is the formatting for the button to click on the resume */
-  text-decoration: none;
-  font-size: 25px;
-  color: #d0d0d0;
-  margin-left: -850px;
-  margin-top: -50px;
-  border: 2px solid #d0d0d0;
-  padding: 0px 10px 0px 10px;
+.app-main {
+  margin-left: 0;
   background-color: transparent;
-  border-radius: 10px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-}
-.spec_img {
-  /* For the image beside the text in the resume click link */
-  filter: invert(1) hue-rotate(0deg);
-  transform: translate(5px, 0px);
-  transition: all 0.3s ease;
-}
-
-.spec_button:hover,
-.spec_button:hover .spec_img:hover {
-  color: #a1a1a1;
-  text-decoration: underline;
-  filter: invert(0.63);
-  border-color: #d0d0d0;
-}
-
-.Header {
-  text-align: left;
-  font-size: 50px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .App-header {
-  /* Formatting for the first part, covered in leaves */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 7vmin);
-  color: #d0d0d0;
-  margin-bottom: 200px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-
-  /* background-image: url("/public/Images/10516833.png"); - Replaced with 3D background */
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-}
-.text-content {
-  /* For the words in the intro section */
-  text-indent: 50px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  gap: 28px;
+  color: var(--text);
+  margin-bottom: 120px;
+  padding: 120px 20px 0;
 }
 
-/* For the cards in the projects section */
-.card {
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(204, 153, 51, 0.3);
-  border-radius: 12px;
-  padding: 25px;
-  margin: 20px;
-  width: 300px;
-  height: 400px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
+.hero-iframe-shell {
+  width: min(1000px, 100%);
+  height: 420px;
   position: relative;
-  overflow: hidden;
+}
+
+.hero-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+  background-color: transparent;
+}
+
+.primary-resume-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: var(--gold);
+  color: #000000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  border: 2px solid transparent;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease,
+    border-color 0.2s ease;
+  box-shadow: 0 4px 8px rgba(204, 153, 51, 0.3);
+}
+
+.primary-resume-button:hover {
+  background-color: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(204, 153, 51, 0.45);
+  border-color: #ffd700;
+}
+
+.sections1 {
+  color: var(--text);
+  padding: 0 75px;
+  font-size: 24px;
+  text-align: left;
+  margin-bottom: 120px;
+}
+
+#Introduction,
+#Projects,
+#Contact {
+  scroll-margin-top: 110px;
+}
+
+#Projects {
+  margin-bottom: 160px;
+}
+
+#Contact {
+  margin-bottom: 260px;
+}
+
+.Header {
+  text-align: left;
+  font-size: clamp(36px, 4vw, 50px);
+  margin-bottom: 16px;
+}
+
+.text-content {
+  text-indent: 40px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.cards-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding-top: 8px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   backdrop-filter: blur(8px);
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(204, 153, 51, 0.2);
-  border-color: rgba(204, 153, 51, 0.5);
-  background: rgba(0, 0, 0, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(204, 153, 51, 0.2);
+  border-color: rgba(204, 153, 51, 0.6);
 }
 
-.card h3 {
-  color: #CC9933;
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  text-align: center;
-  letter-spacing: 0.5px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+.card-content h3 {
+  color: var(--gold);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  text-align: left;
 }
 
-.card p {
-  color: #d0d0d0;
+.card-content p {
+  color: var(--text-muted);
   font-size: 0.95rem;
   line-height: 1.6;
   text-align: left;
-  margin-bottom: 15px;
-  opacity: 0.9;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  margin: 12px 0 0;
 }
 
-.card img {
+.card-image {
   width: 100%;
-  height: 150px;
+  height: 180px;
   object-fit: cover;
   border-radius: 8px;
-  margin-bottom: 15px;
-  border: 1px solid rgba(204, 153, 51, 0.2);
+  border: 1px solid rgba(204, 153, 51, 0.25);
 }
 
-.cards-matrix {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
-  gap: 20px;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+#Contact p {
+  line-height: 1.7;
 }
 
-/* Add smooth scrollbar styling */
-.card::-webkit-scrollbar {
-  width: 6px;
+#Contact a {
+  color: var(--gold-light);
 }
 
-.card::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
+#Contact a:hover {
+  color: #ffd98c;
 }
 
-.card::-webkit-scrollbar-thumb {
-  background: rgba(204, 153, 51, 0.4);
-  border-radius: 3px;
-  transition: background 0.3s ease;
-}
-
-.card::-webkit-scrollbar-thumb:hover {
-  background: rgba(204, 153, 51, 0.6);
-}
-/* Make images responsive */
-@media (max-width: 768px) {
-  .cards-matrix {
-    grid-template-columns: 1fr;
-    padding: 20px;
+@media (max-width: 900px) {
+  .sections1 {
+    padding: 0 32px;
+    font-size: 20px;
   }
-  .card {
-    width: 300px;
-    height: 200px;
+
+  .hero-iframe-shell {
+    height: 340px;
   }
-  .card-image {
-    width: 150px; /* Smaller on mobile */
-    height: 90px;
-  }
-}
-@media (max-width: 480px) {
-  .cards-matrix {
-    grid-template-columns: 1fr;
-  }
-  .card {
-    width: 300px;
-    height: 180px;
+
+  .nav_place {
+    justify-content: center;
+    gap: 16px;
+    padding: 18px 16px 0;
   }
 }
 
-/* For the bubble text introduction */
-.bubble-text-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 2px; /* This is the gap between the letters */
-  font-size: 100px;
-  color: #F2F2EB; /* Muted white text */
-  padding: 0px;
-  text-align: left;
-}
+@media (max-width: 640px) {
+  .App-header {
+    min-height: 72vh;
+    margin-bottom: 72px;
+    padding-top: 100px;
+  }
 
-.bubble-text-container .hoverText {
-  margin: 0;
-  text-align: left;
-  align-items: left;
-  transition: 0.35s font-weight, 0.35s color;
-  cursor: pointer;
-}
+  .hero-iframe-shell {
+    height: 240px;
+  }
 
-.bubble-text-container .hoverText:hover {
-  font-weight: 900;
-  animation: textColorChange 5s infinite;
-  animation-fill-mode: both;
-}
+  .sections1 {
+    padding: 0 18px;
+    font-size: 18px;
+  }
 
-/* Right Letter */
-.bubble-text-container .hoverText:hover + .hoverText {
-  font-weight: 500;
-  animation: textColorChangeLighter 5s infinite;
-  animation-fill-mode: both;
-}
+  .text-content {
+    text-indent: 0;
+  }
 
-/* Left Letter */
-.bubble-text-container .hoverText:has(+ .hoverText:hover) {
-  font-weight: 500;
-  animation: textColorChangeLighter 5s infinite;
-  animation-fill-mode: both;
-}
-
-/* For the letter being hovered over */
-@keyframes textColorChange {
-  0% {
-    color: #CC9933; /* Muted gold */
+  #Contact {
+    margin-bottom: 160px;
   }
-  25% {
-    color: #E6B33F; /* Lighter muted gold */
-  }
-  50% {
-    color: #B38026; /* Darker muted gold */
-  }
-  75% {
-    color: #D4A574; /* Warm muted gold */
-  }
-  100% {
-    color: #CC9933; /* Back to muted gold */
-  }
-}
-
-/* For the left and right letters */
-@keyframes textColorChangeLighter {
-  0% {
-    color: #E6B33F; /* Light muted gold */
-  }
-  25% {
-    color: #F0D4A3; /* Very light muted gold */
-  }
-  50% {
-    color: #E6C8A0; /* Light warm muted gold */
-  }
-  75% {
-    color: #E6D4B8; /* Peach muted gold */
-  }
-  100% {
-    color: #E6B33F; /* Back to light muted gold */
-  }
-}
-
-main {
-  margin-left: 0%;
-  background-color: transparent; /* Changed from rgba(0, 0, 0, 0.9) to transparent */
 }
