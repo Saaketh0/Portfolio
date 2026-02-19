@@ -18,6 +18,12 @@ function ContactSection() {
           GitHub Profile
         </a>
       </p>
+      <p>
+	Chess.com:{" "}
+	<a href={CONTACT.chess} target="_blank" rel = "noreferrer">
+	  Chess Profile
+	</a>
+      </p>
     </section>
   );
 }
