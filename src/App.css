@@ -117,13 +117,13 @@ body {
   padding: 120px 20px 0;
 }
 
-.hero-iframe-shell {
+.hello-iframe-shell {
   width: min(1000px, 100%);
   height: 420px;
   position: relative;
 }
 
-.hero-iframe {
+.hello-iframe {
   width: 100%;
   height: 100%;
   border: none;
@@ -151,6 +151,16 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(204, 153, 51, 0.45);
   border-color: #ffd700;
+}
+
+.hello-note-box {
+  margin-top: -20px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
 }
 
 .sections1 {
@@ -255,7 +265,7 @@ body {
     font-size: 20px;
   }
 
-  .hero-iframe-shell {
+  .hello-iframe-shell {
     height: 340px;
   }
 
@@ -273,7 +283,7 @@ body {
     padding-top: 100px;
   }
 
-  .hero-iframe-shell {
+  .hello-iframe-shell {
     height: 240px;
   }
 

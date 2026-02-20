@@ -1,11 +1,11 @@
-function HeroSection({ resumeUrl }) {
+function HelloSection({ resumeUrl }) {
   return (
     <header className="App-header">
-      <div className="hero-iframe-shell">
+      <div className="hello-iframe-shell">
         <iframe
           src={`${process.env.PUBLIC_URL}/3d-text.html`}
           title="3D text animation"
-          className="hero-iframe"
+          className="hello-iframe"
         />
       </div>
 
@@ -17,8 +17,9 @@ function HeroSection({ resumeUrl }) {
       >
         Here is my resume!
       </a>
+      <div className="hello-note-box">My Name Is Interactable With Too!</div>
     </header>
   );
 }
 
-export default HeroSection;
+export default HelloSection;

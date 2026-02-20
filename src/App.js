@@ -1,6 +1,6 @@
 import "./App.css";
 import TopNav from "./components/TopNav";
-import HeroSection from "./components/HeroSection";
+import HelloSection from "./components/HelloSection";
 import IntroductionSection from "./components/IntroductionSection";
 import ProjectsSection from "./components/ProjectsSection";
 import ContactSection from "./components/ContactSection";
@@ -32,7 +32,7 @@ function App() {
         </aside>
 
         <main className="app-main">
-          <HeroSection resumeUrl={RESUME_URL} />
+          <HelloSection resumeUrl={RESUME_URL} />
           <IntroductionSection />
           <ProjectsSection />
           <ContactSection />
