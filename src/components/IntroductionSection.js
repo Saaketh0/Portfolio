@@ -5,7 +5,7 @@ function IntroductionSection() {
       <p className="text-content">
         Hello and welcome to my website. My name is Saaketh Sodanapalli and I
         am currently a senior at UMass Amherst pursuing a B.S. in Computer
-        Engineering and a dual B.S. in Mathematics.
+        Engineering and a dual degree in Mathematics.
       </p>
       <p className="text-content">
         I chose Computer Engineering because I wanted to understand both
@@ -15,8 +15,8 @@ function IntroductionSection() {
 	My biggest interests currently are AI/ML, Robotics, and Software Dev.
       </p>
       <p className="text-content">
-        Outside academics, I spend a lot of time working out, including club swim
-        at UMass and more running. I also have recently started to play chess, with me hovering at around 1300 in chess.com. I also enjoy
+        Outside academics, I spend a lot of time exercising, including club swim
+        at UMass, weightlifting, and recently running. I also have recently started to play chess a lot, with me hovering at around 1300 in chess.com. I also enjoy
         reading, especially sci-fi, and have recently been adding more
         non-fiction as well.
       </p>
